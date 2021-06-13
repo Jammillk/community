@@ -50,8 +50,6 @@ public class IndexController {
         }
         // 在此查询出首页发帖的media页面
         List<QuestionDTO> questionList = questionService.list();
-
-
         model.addAttribute("questions", questionList);
         return "index";
     }

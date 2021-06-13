@@ -7,18 +7,22 @@ import lombok.ToString;
 
 /**
  * @Author tanjiaming99.com
- * @Date 2021/6/11 13:22
+ * @Date 2021/6/11 22:09
  **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class User {
-    private int id;
-    private String name;
-    private String accountId;
-    private String token;
+public class Question {
+    private Integer id;
+    private String title;
+    private String description;
+    private  String tag;
     private Long gmtCreate;
     private Long gmtModified;
-    private String avatarUrl;
+    private Integer creator;
+    private Integer viewCount;
+    private Integer commentCount;
+    private Integer likeCount;
+
 }

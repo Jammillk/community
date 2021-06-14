@@ -48,19 +48,11 @@ public class PaginationDTO {
     /**
      * 业务逻辑在此判断
      *
-     * @param totalCount
+     * @param totalPage
      * @param page
-     * @param size
      */
-    public void setPagination(Integer totalCount, Integer page, Integer size) {
-
-        // 总页数
-        if (totalCount % size == 0) {
-            totalPage = totalCount / size;
-        } else {
-            totalPage = totalCount / size + 1;
-        }
-
+    public void setPagination(Integer totalPage, Integer page ) {
+        this.totalPage = totalPage;
         this.currentPage = page;
 
         pages.add(page);
@@ -68,7 +60,7 @@ public class PaginationDTO {
             if (page - i > 0) {
                 pages.add(0, page - i);
             }
-            if (page + i <= totalPage) {
+            if (page + i <= this.totalPage) {
                 pages.add(page + i);
             }
         }
@@ -80,7 +72,7 @@ public class PaginationDTO {
             showPrevious = true;
         }
         // 是否展示下一页
-        if (totalPage.equals(page)) {
+        if (this.totalPage.equals(page)) {
             showNext = false;
         } else {
             showNext = true;
@@ -92,7 +84,7 @@ public class PaginationDTO {
             showFirstPage = true;
         }
         // 是否展示最后一页
-        if (pages.contains(totalPage)) {
+        if (pages.contains(this.totalPage)) {
             showEndPage = false;
         } else {
             showEndPage = true;

@@ -1,5 +1,6 @@
 package com.tanjiaming99.community.controller;
 
+import com.tanjiaming99.community.dto.PaginationDTO;
 import com.tanjiaming99.community.dto.QuestionDTO;
 import com.tanjiaming99.community.mapper.QuestionMapper;
 import com.tanjiaming99.community.mapper.UserMapper;
@@ -30,7 +31,9 @@ public class IndexController {
     private QuestionService questionService;
 
     @GetMapping("/")
-    public String hello(HttpServletRequest request, Model model) {
+    public String hello(HttpServletRequest request, Model model,
+                        @RequestParam(name = "page", defaultValue = "1") Integer page,
+                        @RequestParam(name = "size", defaultValue = "3") Integer size) {
         // response是从服务器返回一个cookie给浏览器，那里可以set
         // 但是想要拿到cookie，则是需要在request中拿到，就是“下次请求带过来的”
         Cookie[] cookies = request.getCookies();
@@ -49,8 +52,10 @@ public class IndexController {
             }
         }
         // 在此查询出首页发帖的media页面
-        List<QuestionDTO> questionList = questionService.list();
-        model.addAttribute("questions", questionList);
+        PaginationDTO pagination = questionService.list(page, size);
+
+
+        model.addAttribute("pagination", pagination);
         return "index";
     }
 }

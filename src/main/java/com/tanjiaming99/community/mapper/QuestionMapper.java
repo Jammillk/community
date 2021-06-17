@@ -1,5 +1,6 @@
 package com.tanjiaming99.community.mapper;
 
+import com.tanjiaming99.community.dto.QuestionDTO;
 import com.tanjiaming99.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -29,4 +30,7 @@ public interface QuestionMapper {
 
     @Select("select count(1) from question where creator = #{userId}")
     Integer countByUserId(@Param("userId") int userId);
+
+    @Select("select * from question where id = #{id}")
+    Question getById(@Param("id")Integer id);
 }

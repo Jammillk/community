@@ -4,6 +4,7 @@ import com.tanjiaming99.community.dto.PaginationDTO;
 import com.tanjiaming99.community.dto.QuestionDTO;
 import com.tanjiaming99.community.exception.CustomizeErrorCode;
 import com.tanjiaming99.community.exception.CustomizeException;
+import com.tanjiaming99.community.mapper.QuestionExtMapper;
 import com.tanjiaming99.community.mapper.QuestionMapper;
 import com.tanjiaming99.community.mapper.UserMapper;
 import com.tanjiaming99.community.model.Question;
@@ -30,6 +31,9 @@ public class QuestionService {
 
     @Autowired
     private QuestionMapper questionMapper;
+
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
     @Autowired
     private UserMapper userMapper;
@@ -154,5 +158,12 @@ public class QuestionService {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
         }
+    }
+
+    public void incView(Integer id) {
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
     }
 }

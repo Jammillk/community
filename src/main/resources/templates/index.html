@@ -17,13 +17,13 @@
             <h3><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>发现</h3>
             <div class="media" th:each="question : ${pagination.questions}">
                 <div class="media-left">
-                    <a th:href="@{'/question/' +${question.id}}">
+                    <a th:href="@{'/question/' +${question.getId()}}">
                         <img class="media-object img-circle" th:src="${question.user.avatarUrl}">
                     </a>
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading" >
-                        <a  th:href="@{'/question/' +${question.id}}" th:text="${question.title}"></a>
+                        <a  th:href="@{'/question/' +${question.getId()}}" th:text="${question.title}"></a>
                     </h4>
                     <span th:text="${question.description}"></span>
                     <span class="desc_text">

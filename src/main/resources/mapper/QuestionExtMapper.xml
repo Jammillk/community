@@ -25,4 +25,10 @@
         where id = #{id}
     </update>
 
+    <update id="incCommentCount" parameterType="com.tanjiaming99.community.model.Question">
+        update QUESTION
+        set
+            COMMENT_COUNT = COMMENT_COUNT + #{commentCount,jdbcType=INTEGER}
+        where id = #{id}
+    </update>
 </mapper>

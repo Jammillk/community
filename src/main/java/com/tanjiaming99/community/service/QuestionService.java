@@ -72,13 +72,14 @@ public class QuestionService {
             BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
             System.out.println(questionDTO);
+
             questionDTOList.add(questionDTO);
         }
         paginationDTO.setQuestions(questionDTOList);
         return paginationDTO;
     }
 
-    public PaginationDTO list(int userId, Integer page, Integer size) {
+    public PaginationDTO list(Long userId, Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
 
         Integer totalPage;
@@ -125,7 +126,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public QuestionDTO getById(Integer id) {
+    public QuestionDTO getById(Long id) {
         Question question = questionMapper.selectByPrimaryKey(id);
         if (question == null){
             throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
@@ -141,6 +142,10 @@ public class QuestionService {
         if (question.getId() == null){
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
+            // 默认值
+            question.setViewCount(0);
+            question.setCommentCount(0);
+            question.setCommentCount(0);
             // 第一次创建
             questionMapper.insert(question);
         }else{
@@ -160,7 +165,7 @@ public class QuestionService {
         }
     }
 
-    public void incView(Integer id) {
+    public void incView(Long id) {
         Question question = new Question();
         question.setId(id);
         question.setViewCount(1);

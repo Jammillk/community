@@ -1,8 +1,6 @@
 package com.tanjiaming99.community.controller;
 
 import com.tanjiaming99.community.dto.QuestionDTO;
-import com.tanjiaming99.community.mapper.QuestionMapper;
-import com.tanjiaming99.community.mapper.UserMapper;
 import com.tanjiaming99.community.model.Question;
 import com.tanjiaming99.community.model.User;
 import com.tanjiaming99.community.service.QuestionService;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -28,7 +25,7 @@ public class PublishController {
     private QuestionService questionService;
 
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable("id") Integer id,
+    public String edit(@PathVariable("id") Long id,
                        Model model) {
         QuestionDTO question = questionService.getById(id);
 
@@ -49,7 +46,7 @@ public class PublishController {
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("tag") String tag,
-            @RequestParam("id") Integer id,
+            @RequestParam("id") Long id,
             HttpServletRequest request,
             Model model) {
         model.addAttribute("title", title);

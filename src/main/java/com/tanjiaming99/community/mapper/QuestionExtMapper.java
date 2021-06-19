@@ -9,4 +9,5 @@ import com.tanjiaming99.community.model.Question;
 
 public interface QuestionExtMapper {
     int incView(Question recode);
+    int incCommentCount(Question recode);
 }

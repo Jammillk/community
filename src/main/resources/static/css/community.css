@@ -7,7 +7,7 @@ body {
     background-color: white;
 }
 
-.btnpublish{
+.btn-publish{
     float: right;
     margin-bottom: 15px;
 }
@@ -15,6 +15,10 @@ body {
 .media-object{
     width: 38px;
     height: 38px;
+}
+
+.media-body{
+    padding-top: 10px;
 }
 
 .desc_text{
@@ -31,4 +35,9 @@ body {
 .community-menu{
     color: #999999;
     font-size: 12px;
+}
+
+.comment{
+    margin: 15px 0;
+    resize:none;
 }

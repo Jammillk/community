@@ -10,6 +10,7 @@ import com.tanjiaming99.community.model.Comment;
 import com.tanjiaming99.community.model.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Author tanjiaming99.com
@@ -28,6 +29,7 @@ public class CommentService {
     private QuestionExtMapper questionExtMapper;
 
 
+    @Transactional
     public void insert(Comment comment) {
         if (comment.getParentId() == null || comment.getParentId() == 0) {
             throw new CustomizeException(CustomizeErrorCode.TARGET_PARENT_NOT_FOUND);
@@ -45,12 +47,15 @@ public class CommentService {
         } else {
             // 回复问题
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
-            // 传进去的数就是加上的数……
-            question.setCommentCount(1);
             if (question == null) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
+            // 这里没有事务操作
+            // 插入评论
             commentMapper.insert(comment);
+            // 增加回复数
+            // 传进去的数就是加上的数……
+            question.setCommentCount(1);
             questionExtMapper.incCommentCount(question);
         }
     }
